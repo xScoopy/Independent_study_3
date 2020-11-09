@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Halloween Party</title>
-  </head>
-  <body>
-    
-    <h1>Happy Halloween {{name}}!</h1>
-    
-  </body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+  <img src="{{ url_for('static', filename='/assets/fall.jpg')}}" alt="Trees changing colors in front of a mountaintop.">
+  <h3>Fall Events</h3>
+</section>
+{% endblock %}

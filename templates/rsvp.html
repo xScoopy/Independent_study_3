@@ -1,39 +1,32 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>RSVP</title>
-  </head>
-  <body>
-    
-    <!-- <h1>Already RSVP'd:</h1>
-    {% for guest in guest_list %}
-    {% if guest.rsvp %}
-    <h2>{{guest.name}}</h2>
-    {% endif %}
-    {% endfor %}
-    <h1>Still need an RSVP from: </h1>
-    {% for guest in guest_list %}
-    {% if not guest.rsvp %}
-    <h2>{{guest.name}}</h2>
-    {% endif %}
-    {% endfor %} -->
+{% extends 'base.html' %}
 
-    <form action="/guests" method="POST" class='rsvp_form'>
-      <label for="name">Full Name:</label>
-      <input type="text" name="name" id="name">
-      <label for="email">Email:</label>
-      <input type="email" name="email" id="email">
-      <label for="plus-one">Plus one:</label>
-      <input type="text" name="plus-one" id="plus-one">
-      <label for="phone">Phone number:</label>
-      <input type="tel" name="phone" id="phone">
-      <label for="costume">Costume description:</label>
-      <input type="text" name="costume" id="costume">
-      <input type="submit">
-     
+{% block content %}
+    <main>
+      <div class="rsvp-list">
+        <h2>Attending:</h2>
+        {% if guests %}
+          <ul>
+          {% for guest in guests %}
 
+            <li>{{guest.name}}</li>
 
-    
-  </body>
-</html>
+          {% endfor %}
+        </ul>
+        {% else %}
+          <h4>No guests yet!</h4>
+        {% endif %}
+      </div>
+      <form action="/guests" method="POST">
+        <label for="name">Guest Name</label>
+        <input type="text" name="name" id="name" required />
+        <label for="email">Guest's Email</label>
+        <input type="email" name="email" id="email" required />
+        <label for="plus-one">Guest's Tagalong</label>
+        <input type="text" name="plus-one" id="plus-one" />
+        <label for="phone">Guest's Phone Number</label>
+        <input type="tel" name="phone" id="phone" />
+        <input type="submit" />
+      </form>
+    </main>
+
+{% endblock %}

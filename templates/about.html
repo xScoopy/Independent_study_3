@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Party Time</title>
-  </head>
-  <body>
-    
-    <h1>When is the party?!</h1>
-    <p>Mark your calendar, the party is on {{ day }}!</p>
-    <p>Also, don't be late! Shenanigans start at {{ time }}.</p>
-  
-  </body>
-</html>
+{% extends 'base.html' %}
+
+<section>
+  <h3>Fall Events Details</h3>
+  <p>The party is on {{ date }} at {{ time }}</p>
+</section>
