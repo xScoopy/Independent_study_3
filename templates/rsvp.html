@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>RSVP</title>
+  </head>
+  <body>
+    
+    <!-- <h1>Already RSVP'd:</h1>
+    {% for guest in guest_list %}
+    {% if guest.rsvp %}
+    <h2>{{guest.name}}</h2>
+    {% endif %}
+    {% endfor %}
+    <h1>Still need an RSVP from: </h1>
+    {% for guest in guest_list %}
+    {% if not guest.rsvp %}
+    <h2>{{guest.name}}</h2>
+    {% endif %}
+    {% endfor %} -->
+
+    <form action="/guests" method="POST" class='rsvp_form'>
+      <label for="name">Full Name:</label>
+      <input type="text" name="name" id="name">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email">
+      <label for="plus-one">Plus one:</label>
+      <input type="text" name="plus-one" id="plus-one">
+      <label for="phone">Phone number:</label>
+      <input type="tel" name="phone" id="phone">
+      <label for="costume">Costume description:</label>
+      <input type="text" name="costume" id="costume">
+      <input type="submit">
+     
+
+
+    
+  </body>
+</html>

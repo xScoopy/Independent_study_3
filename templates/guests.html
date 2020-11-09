@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Guest List</title>
+  </head>
+  <body>
+    
+    <h1>Take a look at who's all coming!!!!</h1>
+    <ul>
+        {% for guest in guest_list %}
+        <li>{{ guest.name }} is bringing {{ guest.plus_one }}</li>
+        {% endfor %}
+  
+  </body>
+</html>
