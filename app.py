@@ -9,12 +9,26 @@ every function & class to explain what the code does.
 from flask import Flask, request, render_template, url_for
 from guests import Guest
 from datetime import datetime, date
+from pprint import PrettyPrinter
+import requests
+import os
+
+API_KEY = os.getenv('API_KEY')
+
 
 app = Flask(__name__)
 
 # Define global variables (stored here for now)
 
 guest_list = []
+
+pp = PrettyPrinter(indent=4)
+
+today = date.today()
+# Get month as a number:
+month = today.strftime('%m')
+# get current year:
+year = today.strftime('%Y')
 
 
 @app.route('/')
@@ -29,10 +43,48 @@ def about_page():
     # Sometimes, a cleaner way to pass variables to templates is to create a
     # context dictionary, and then pass the data in by dictionary key
 
-    context = {
-        "date": "10/31/2020",
-        "time": "10:00 pm"
+    url = 'https://calendarific.com/api/v2/holidays'
+    today = date.today()
+    # Get month as a number:
+    month = today.strftime('%m')
+    # get current year:
+    year = today.strftime('%Y')
+
+    params = {
+        'api_key': API_KEY,
+        'country': 'US',
+        'year': year,
+        'month': month,
+        
     }
+    result_json = requests.get(url, params=params).json()
+    pp.pprint(result_json)
+    #trim down json to include response and holiday
+    new_result = result_json["response"]["holidays"]
+
+    holidays = []
+    for holiday in new_result:
+        new_holiday = { 
+            "name" : holiday["name"],
+            "date" : holiday["date"]["iso"],
+            "description" : holiday["description"]
+        }
+        holidays.append(new_holiday)
+
+    
+        
+    
+    
+    # HINT: in holidays, we'll probably need a way to store key-value pairs.
+    # Think about the format we receive the response in
+    # dates = #access data from your response
+    # descriptions = ''#access data from your response
+    context = {
+        "holidays": holidays,
+        # "date": dates,
+        # "description": descriptions
+    }
+
     return render_template('about.html', **context)
 
 
